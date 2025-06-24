@@ -14,7 +14,6 @@ class Program
 {
     static async Task Main()
     {
-        // Inicialização
         var logs = new List<LogAcao>();
         var serv = new ServicoSelic();
         var down = Path.Combine(Environment.GetFolderPath(
@@ -23,10 +22,8 @@ class Program
         db.Database.Migrate();
         bool sair = false;
 
-        // Loop principal
         while (!sair)
         {
-            // Menu
             Console.Clear();
             Console.WriteLine("===== SelicBC =====\n");
             Console.WriteLine("1) Coletar Dados API");
