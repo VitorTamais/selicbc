@@ -106,36 +106,132 @@ SelicBC
 
 ## Como Executar
 
-1 - Clone o repositório:
+#### Instalar o .NET SDK 8.0
+
+#### Windows
+
+Acesse [dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0) e clique em **Download .NET SDK 8.0**.
+Execute o instalador e aceite os termos.
+
+Abra o PowerShell e execute:
 
 ```bash
-git clone https://github.com/seuusuario/selicbc.git
-cd selicbc
+dotnet --version
 ```
-2 - Restaure os pacotes e compile:
+Deve exibir algo como: `8.0.x`
+
+
+#### Linux (Ubuntu/Debian)
+
+No terminal, baixe o script de instalação:
 
 ```bash
-dotnet restore
-dotnet build
+wget https://aka.ms/install-dotnet.sh -O install-dotnet.sh
+sudo bash install-dotnet.sh 8.0
 ```
 
-3 - Aplique as migrações do banco (apenas na primeira execução):
+Verifique a instalação:
+
+```bash
+dotnet --version
+```
+Deve exibir: `8.0.x`
+
+
+### Configurar Variáveis de Ambiente (opcional)
+
+#### Windows
+
+Vá em **Variáveis de Ambiente → Path → Editar**.
+Adicione o seguinte caminho:
+
+```
+%USERPROFILE%\.dotnet\tools
+```
+
+Abra um novo PowerShell e instale:
+
+```bash
+dotnet tool install --global dotnet-ef --version 8.0.8
+```
+
+---
+
+#### Linux
+
+Instale a ferramenta:
+
+```bash
+dotnet tool install --global dotnet-ef --version 8.0.8
+```
+
+Adicione ao `PATH` (no `~/.bashrc` ou `~/.profile`):
+
+```bash
+export PATH="$PATH:$HOME/.dotnet/tools"
+```
+
+Recarregue:
+
+```bash
+source ~/.bashrc
+```
+
+
+
+### Clonar o Repositório
+
+```bash
+git clone https://github.com/SEU_USUARIO/SelicBC.git
+cd SelicBC
+```
+
+
+### Instalar Pacotes NuGet
+
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite --version 8.0.8
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.8
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.8
+dotnet tool install --global dotnet-ef --version 8.0.8
+dotnet add package EPPlus --version 8.0.1
+```
+
+Esses pacotes permitem usar SQLite, gerar planilhas Excel e utilizar o EF Core pela CLI.
+
+
+
+### Criar e Aplicar Migrações
 
 ```bash
 dotnet ef migrations add Inicial
 dotnet ef database update
 ```
 
-4 - Execute a aplicação:
+Isso cria as tabelas `Registros` e `Logs` no banco `selicbc.db`.
+
+
+### Compilar e Executar a Aplicação
+
+Restaurar dependências:
+
+```bash
+dotnet restore
+```
+
+Compilar o projeto:
+
+```bash
+dotnet build
+```
+
+Executar:
 
 ```bash
 dotnet run
 ```
 
-
-
-
-
+O menu interativo aparecerá no console.
 
 ## Exemplo de Uso
 
